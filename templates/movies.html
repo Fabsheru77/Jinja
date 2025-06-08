@@ -1,0 +1,13 @@
+{% extends "base.html" %} 
+{% block content %} 
+
+<ul style="list-style:none">
+{% for movie in movies %}
+  <li>
+    <b>{{ movie.title }}</b> is a {{ movie.genre }} movie and it's rating is {{ movie.rating }} {{ movie.stars|safe }} {% if movie.rating > 3 %}🙂{% else %}🙁{% endif %}
+  </li>
+{% endfor %}
+</ul>
+
+{% endblock %}
+
