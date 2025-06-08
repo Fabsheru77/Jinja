@@ -1,0 +1,80 @@
+{% extends "base.html" %} 
+{% block content %} 
+
+    {% if feedback %}
+    <ul>
+        {% for item in feedback %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+    <div><a href="/register">CLEAR</a></div>
+    {% else %}
+
+<h2>A Python/Flask Postback Form</h2>
+<p>The following is a demonstration of a form that can be filled out and when data is entered, the data is submitted back to the same page so the data can be seen on the page.</p>
+<p>Any form fields that have names with an underscore between significant words, such as <b>First_Name</b> 
+      will be split into separate words, for example <b>First Name</b> upon submission.</p>  
+  <form method="POST" action="" class="main-form">
+    <div>
+      <label for="FirstName">First Name</label><br>
+      <input type="text" name="First_Name" id="FirstName" placeholder="First Name" required autofocus>
+    </div>
+    <div>
+      <label for="Last Nmae">Last Name</label><br>
+      <input type="text" name="Last_Name" id="LastName" placeholder="Last Name" required autofocus>
+    </div>
+    <div>
+      <label for="Address">City</label><br>
+      <input type="text" name="Address" id="Address" placeholder="Address" required autofocus>
+    </div>
+    <div>
+      <label for="Email">Email"</label><br>
+      <input type="email" name="Email" id="Email" placeholder="Email" required autofocus>
+    </div>
+    <div>
+      <label for="Phone">Phone</label><br>
+      <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="xxx-xxx-xxxx" required>
+    </div>
+    <div>
+      <label for="State">State</label></br>
+      <select name="State"> id="State" required>
+        <option value="">Pick a State</option>
+        <option value="AK">Alaska</option>
+        <option value="CA">California</option>
+        <option value="OR">Oregon</option>
+        <option value="WA">Washington</option>
+      </select>
+    </div>
+    <div>
+      <fieldset>
+        <legend>Would you like to join our mailing list?</legend>
+        <label>
+          <input type = "radio" name="mailing_list" value="Yes"> Yes<br>
+          <input type = "radio" name="mailing_list" value="No"> No
+        </label>
+      </fieldset>
+    </div>
+    <div>
+      <fieldset>
+        <legend>Interested in?</legend>
+        <label>
+          <input type = "checkbox" name="Interested_in[]" value="Website"> Website<br>
+          <input type = "checkbox" name="Interested_in[]" value="Shopping Cart"> Shopping Cart<br>
+          <input type = "checkbox" name="Interested_in[]" value="JS Gallery"> JS Gallery<br>
+          <input type = "checkbox" name="Interested_in[]" value="Lollipops"> Lollipops<br>
+          
+        </label>
+      </fieldset>
+    </div>
+    <div> 
+      <label for="Bio">Bio</labe></br>
+        <textarea name="Bio" id=Bio placeholder="Please enter a short Bio" raw="4" cols="60"></textarea>
+    </div>
+    <div>
+      <input type="submit">
+    </div>
+  </form>
+{% endif %}
+
+{% endblock %}
+

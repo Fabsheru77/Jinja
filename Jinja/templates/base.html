@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/python/cpython/main/PC/icons/python.ico">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/forms.css') }}">
+    <style>
+      /* used for stars in movies */
+      .checked {
+        color: gold;
+      }
+      /* colors for flash messages */
+      .error{
+        background-color:red;
+      }
+
+      .success{
+        background-color:blue;
+      }
+
+      .warning{
+        background-color:yellow;
+      }
+
+
+
+      
+    </style>
+    </head>
+    <body>
+     <h1>{{title}}</h1>   
+        <nav class="w3-bar w3-black">      
+          <a href="/" class="w3-bar-item w3-button">Home</a>
+          <a href="/about" class="w3-bar-item w3-button">About</a>
+          <a href="/movies" class="w3-bar-item w3-button">Movies</a> 
+          <a href="/register" class="w3-bar-item w3-button">Register</a>
+          <a href="/users" class="w3-bar-item w3-button">Users</a>
+          <a href="/recipes" class="w3-bar-item w3-button">Recipes</a>
+          <a href="/admin" class="w3-bar-item w3-button">Admin</a>
+          <a href="/sign_up" class="w3-bar-item w3-button">Sign Up</a>
+          {% if current_user.is_authenticated %}
+            <a href="/logout" class="w3-bar-item w3-button">Logout</a>
+          {% else %}
+            <a href="/login" class="w3-bar-item w3-button">Login</a>
+          {% endif %}
+    </nav> 
+      {% if current_user.is_authenticated %}
+        <p><em>Chef <b>{{ current_user.first_name }}</b> is logged in.  Don't forget to <a href="/logout">Logout</a>!</em></p>
+      {% endif %}
+ 
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            {% if category != 'message' %}
+            <div class="w3-panel {{ category }}" style="max-width:500px; position:relative">
+              <span onclick="this.parentElement.style.display='none'"
+            class="w3-button w3-large w3-display-topright">&times;</span>
+              <h3>{{ category.title() }}</h3>
+              <p>{{ message }}</p>
+            </div>
+              {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+
+  {% block content %}
+      
+  {% endblock %}
+    
+  </body>
+</html>
+
